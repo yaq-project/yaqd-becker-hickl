@@ -1,0 +1,17 @@
+protocol = "becker-hickl-spc130"
+doc = ""
+traits = ["is-daemon"]
+
+[links]
+source = "https://gitlab.com/yaq/yaqd-becker-hickl"
+bugtracker = "https://gitlab.com/yaq/yaqd-becker-hickl/-/issues"
+
+[installation]
+PyPI = "https://pypi.org/project/yaqd-becker-hickl"
+
+[config]
+
+[state]
+
+[messages]
+
