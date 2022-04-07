@@ -11,7 +11,113 @@ PyPI = "https://pypi.org/project/yaqd-becker-hickl"
 
 [config]
 
+ini_file_path.type = "string"
+ini_file_path.doc = "Path to the ini file for the SPC_init call"
+
 [state]
+
+collect_time.type = "float"
+collect_time.default = 0.01
+collect_time.doc = "Collection time in seconds"
+
+tac_range.type = "float"
+tac_range.default = 50.0
+tac_range.doc = "TAC range in nanoseconds"
+
+tac_gain.type = "int"
+tac_gain.default = 1
+tac_gain.doc = "TAC gain multiplier"
+
+freq_div.type = "string"
+freq_div.default = "4"
+freq_div.doc = "TAC gain multiplier"
+
+rate_count_time.type = "string"
+rate_count_time.default = "1.0"
+rate_count_time.doc = "Rate counting time in sec"
 
 [messages]
 
+get_collect_time.response = "float"
+set_collect_time.request = [{"name"= "time", "type"= "float", "doc"= "time in sec"}]
+get_collect_time.doc = "Collection time in seconds"
+get_collect_time_units.response = "string"
+get_collect_time_units.doc = "Returns 's' for seconds"
+get_collect_time_limits.response = {"type"="array", "items"="float"}
+get_collect_time_limits.doc = "Returns [0.0001, 100000.0] in seconds"
+
+
+get_tac_range.response = "float"
+set_tac_range.request = [{"name"= "time", "type"= "float", "doc"= "time in ns"}]
+get_tac_range.doc = "TAC range in nanoseconds"
+get_tac_range_units.response = "string"
+get_tac_range_units.doc = "Returns 'ns' for nanoseconds"
+get_tac_range_limits.response = {"type"="array", "items"="float"}
+get_tac_range_limits.doc = "Returns [50.0, 5000.0] in nanoseconds"
+
+
+get_tac_gain.response = "int"
+set_tac_gain.request = [{"name"= "gain", "type"= "int", "doc"= "TAC gain multiplier"}]
+get_tac_gain.doc = "TAC gain multiplier"
+get_tac_gain_limits.response = {"type"="array", "items"="int"}
+get_tac_gain_limits.doc = "Returns [1, 15]"
+
+
+get_freq_div.response = "string"
+set_freq_div.request = [{"name"= "divisor", "type"= "string", "doc"= "Frequency divider"}]
+get_freq_div.doc = "Frequency divider, represented as a string"
+get_freq_div_options.response = {"type"="array", "items"="string"}
+get_freq_div_options.doc = "Returns [1, 2, 4]"
+
+
+get_rate_count_time.response = "string"
+set_rate_count_time.request = [{"name"= "time", "type"= "string", "doc"= "rate counter time in seconds"}]
+get_rate_count_time.doc = "rate counter time in seconds, represented as a string"
+get_rate_count_time_options.response = {"type"="array", "items"="string"}
+get_rate_count_time_options.doc = "Returns [0.05, 0.1, 0.25, 1.0]"
+
+
+
+[properties]
+
+[properties.collect_time]
+getter = "get_collect_time"
+setter = "set_collect_time"
+units_getter = "get_collect_time_units"
+limits_getter = "get_collect_time_limits"
+control_kind = "hinted"
+record_kind = "metadata"
+type = "float"
+
+[properties.tac_range]
+getter = "get_tac_range"
+setter = "set_tac_range"
+units_getter = "get_tac_range_units"
+limits_getter = "get_tac_range_limits"
+control_kind = "normal"
+record_kind = "metadata"
+type = "float"
+
+[properties.tac_gain]
+getter = "get_tac_gain"
+setter = "set_tac_gain"
+limits_getter = "get_tac_gain_limits"
+control_kind = "normal"
+record_kind = "metadata"
+type = "int"
+
+[properties.freq_div]
+getter = "get_freq_div"
+setter = "set_freq_div"
+options_getter = "get_freq_div_limits"
+control_kind = "normal"
+record_kind = "metadata"
+type = "string"
+
+[properties.rate_count_time]
+getter = "get_rate_count_time"
+setter = "set_rate_count_time"
+options_getter = "get_rate_count_time_limits"
+control_kind = "normal"
+record_kind = "metadata"
+type = "string"
