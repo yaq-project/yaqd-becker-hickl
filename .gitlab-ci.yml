@@ -1,5 +1,6 @@
 # configure
 image: python:latest
+
 variables:
   PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"  # cache on project level
 cache:
@@ -9,10 +10,9 @@ cache:
 
 # common to all scripts
 before_script:
+  - choco install python --version=3.10 -y 
+  - $env:PATH+=";C:\Python310;C:\Python310\Scripts" # add to PATH without restart
   - python -V
-  - pip install -U virtualenv
-  - virtualenv venv
-  - source venv/bin/activate
   - pip install -U flit
   - pip install -U pytest
   - pip install -U mypy
@@ -24,22 +24,41 @@ before_script:
 # test stage
 
 mypy:
+  tags:
+    - shared-windows
+    - windows
+    - windows-1809
+
   stage: test
   script:
     - mypy yaqd_becker_hickl
 entry:
+  tags:
+    - shared-windows
+    - windows
+    - windows-1809
   stage: test
   script:
     - yaqd-becker-hickl-spc130 --version
     - yaqd-becker-hickl-spc130 --help
     - yaqd-becker-hickl-spc130 --protocol
 traits:
+  tags:
+    - shared-windows
+    - windows
+    - windows-1809
+
   stage: test
   script:
     - for i in yaqd_becker_hickl/*.avpr; do yaq-traits check $i; done
 
 # deploy stage
 flit:
+  tags:
+    - shared-windows
+    - windows
+    - windows-1809
+
   stage: deploy
   script:
     - flit publish
