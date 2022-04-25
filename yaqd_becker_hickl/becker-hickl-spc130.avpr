@@ -35,6 +35,12 @@
             "origin": "is-daemon",
             "type": "boolean"
         },
+        "loop_at_startup": {
+            "default": false,
+            "doc": "If set to true, the daemon will begin to loop measure as soon as it starts.",
+            "origin": "has-measure-trigger",
+            "type": "boolean"
+        },
         "make": {
             "default": null,
             "origin": "is-daemon",
@@ -81,6 +87,51 @@
             "request": [],
             "response": "boolean"
         },
+        "get_channel_mappings": {
+            "doc": "Defines which mapping keys apply to which channel keys. Each channel may have zero or many mappings. Mappings must broadcast into corresponding channels.",
+            "origin": "has-mapping",
+            "request": [],
+            "response": {
+                "type": "map",
+                "values": {
+                    "items": "string",
+                    "type": "array"
+                }
+            }
+        },
+        "get_channel_names": {
+            "doc": "Get current channel names.",
+            "origin": "is-sensor",
+            "request": [],
+            "response": {
+                "items": "string",
+                "type": "array"
+            }
+        },
+        "get_channel_shapes": {
+            "doc": "Get current channel shapes. If list is empty, channel is scalar.",
+            "origin": "is-sensor",
+            "request": [],
+            "response": {
+                "type": "map",
+                "values": {
+                    "items": "int",
+                    "type": "array"
+                }
+            }
+        },
+        "get_channel_units": {
+            "doc": "Get current channel units.",
+            "origin": "is-sensor",
+            "request": [],
+            "response": {
+                "type": "map",
+                "values": [
+                    "null",
+                    "string"
+                ]
+            }
+        },
         "get_collect_time": {
             "doc": "Collection time in seconds",
             "request": [],
@@ -122,6 +173,58 @@
             "response": {
                 "items": "string",
                 "type": "array"
+            }
+        },
+        "get_mapping_id": {
+            "doc": "Mapping ID. This integer increments every time the mapping is updated. Clients can safely check this id to verify that their cached mappings are correct, if desired.",
+            "origin": "has-mapping",
+            "request": [],
+            "response": "int"
+        },
+        "get_mapping_units": {
+            "doc": "Must return units for every mapping. Units can be null.",
+            "origin": "has-mapping",
+            "request": [],
+            "response": {
+                "type": "map",
+                "values": [
+                    "null",
+                    "string"
+                ]
+            }
+        },
+        "get_mappings": {
+            "doc": "Mappings themselves.",
+            "origin": "has-mapping",
+            "request": [],
+            "response": {
+                "type": "map",
+                "values": [
+                    "null",
+                    "ndarray",
+                    "double"
+                ]
+            }
+        },
+        "get_measured": {
+            "doc": "Returns map of channel_name to measured_value. Always returns additional key measurement_id.",
+            "origin": "is-sensor",
+            "request": [],
+            "response": {
+                "type": "map",
+                "values": [
+                    "int",
+                    "double",
+                    "ndarray"
+                ]
+            }
+        },
+        "get_measurement_id": {
+            "doc": "Get current measurement_id. Clients are encouraged to watch for this to be updated before calling get_measured to get entire measurement.",
+            "origin": "is-sensor",
+            "request": [],
+            "response": {
+                "type": "int"
             }
         },
         "get_rate_count_time": {
@@ -186,6 +289,18 @@
                 ]
             }
         },
+        "measure": {
+            "doc": "Initiate a measurement. Returns integer, measurement ID.",
+            "origin": "has-measure-trigger",
+            "request": [
+                {
+                    "default": false,
+                    "name": "loop",
+                    "type": "boolean"
+                }
+            ],
+            "response": "int"
+        },
         "set_collect_time": {
             "request": [
                 {
@@ -247,6 +362,12 @@
                 }
             ],
             "response": "null"
+        },
+        "stop_looping": {
+            "doc": "Stop looping measurement.",
+            "origin": "has-measure-trigger",
+            "request": [],
+            "response": "null"
         }
     },
     "properties": {
@@ -266,7 +387,7 @@
             "dynamic": true,
             "getter": "get_freq_div",
             "limits_getter": null,
-            "options_getter": "get_freq_div_limits",
+            "options_getter": "get_freq_div_options",
             "record_kind": "metadata",
             "setter": "set_freq_div",
             "type": "string",
@@ -277,7 +398,7 @@
             "dynamic": true,
             "getter": "get_rate_count_time",
             "limits_getter": null,
-            "options_getter": "get_rate_count_time_limits",
+            "options_getter": "get_rate_count_time_options",
             "record_kind": "metadata",
             "setter": "set_rate_count_time",
             "type": "string",
@@ -336,7 +457,10 @@
         }
     },
     "traits": [
-        "is-daemon"
+        "has-mapping",
+        "has-measure-trigger",
+        "is-daemon",
+        "is-sensor"
     ],
     "types": [
         {

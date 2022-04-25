@@ -1,6 +1,6 @@
 protocol = "becker-hickl-spc130"
 doc = ""
-traits = ["is-daemon"]
+traits = ["has-mapping", "has-measure-trigger", "is-sensor", "is-daemon"]
 
 [links]
 source = "https://gitlab.com/yaq/yaqd-becker-hickl"
@@ -109,7 +109,7 @@ type = "int"
 [properties.freq_div]
 getter = "get_freq_div"
 setter = "set_freq_div"
-options_getter = "get_freq_div_limits"
+options_getter = "get_freq_div_options"
 control_kind = "normal"
 record_kind = "metadata"
 type = "string"
@@ -117,7 +117,7 @@ type = "string"
 [properties.rate_count_time]
 getter = "get_rate_count_time"
 setter = "set_rate_count_time"
-options_getter = "get_rate_count_time_limits"
+options_getter = "get_rate_count_time_options"
 control_kind = "normal"
 record_kind = "metadata"
 type = "string"
