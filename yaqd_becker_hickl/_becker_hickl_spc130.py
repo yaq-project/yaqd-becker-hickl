@@ -1,6 +1,7 @@
 __all__ = ["BeckerHicklSpc130"]
 
 import asyncio
+from typing import Dict, Any, List, TYPE_CHECKING
 from ctypes import (
     byref,
     c_char_p,
@@ -9,9 +10,12 @@ from ctypes import (
     c_short,
     create_string_buffer,
     Structure,
-    WinDLL,
 )
-from typing import Dict, Any, List
+
+if not TYPE_CHECKING:
+    from ctypes import WinDLL
+else:
+    WinDLL = None  # type: ignore
 
 import numpy as np
 from yaqd_core import HasMapping, HasMeasureTrigger, IsSensor, IsDaemon
