@@ -12,3 +12,7 @@ yaq daemons for Becker-Hickl products.
 This package contains the following daemon(s):
 
 - https://yaq.fyi/daemons/becker-hickl-spc130
+
+## maintainers
+
+[Dan Kohler](https://github.com/ddkohler)
