@@ -77,8 +77,8 @@
         "PyPI": "https://pypi.org/project/yaqd-becker-hickl"
     },
     "links": {
-        "bugtracker": "https://gitlab.com/yaq/yaqd-becker-hickl/-/issues",
-        "source": "https://gitlab.com/yaq/yaqd-becker-hickl"
+        "bugtracker": "https://github.com/yaq-project/yaqd-becker-hickl/issues",
+        "source": "https://github.com/yaq-project/yaqd-becker-hickl"
     },
     "messages": {
         "busy": {

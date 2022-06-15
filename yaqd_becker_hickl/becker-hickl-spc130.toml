@@ -3,8 +3,8 @@ doc = ""
 traits = ["has-mapping", "has-measure-trigger", "is-sensor", "is-daemon"]
 
 [links]
-source = "https://gitlab.com/yaq/yaqd-becker-hickl"
-bugtracker = "https://gitlab.com/yaq/yaqd-becker-hickl/-/issues"
+source = "https://github.com/yaq-project/yaqd-becker-hickl"
+bugtracker = "https://github.com/yaq-project/yaqd-becker-hickl/issues"
 
 [installation]
 PyPI = "https://pypi.org/project/yaqd-becker-hickl"
