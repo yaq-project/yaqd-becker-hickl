@@ -73,6 +73,10 @@
         }
     },
     "doc": "",
+    "hardware": [
+        "becker-hickl.spc130",
+        "idquantique.id100-50"
+    ],
     "installation": {
         "PyPI": "https://pypi.org/project/yaqd-becker-hickl"
     },

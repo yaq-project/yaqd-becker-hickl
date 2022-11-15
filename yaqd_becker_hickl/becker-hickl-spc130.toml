@@ -1,6 +1,7 @@
 protocol = "becker-hickl-spc130"
 doc = ""
 traits = ["has-mapping", "has-measure-trigger", "is-sensor", "is-daemon"]
+hardware = ["becker-hickl.spc130", "idquantique.id100-50"]
 
 [links]
 source = "https://github.com/yaq-project/yaqd-becker-hickl"
